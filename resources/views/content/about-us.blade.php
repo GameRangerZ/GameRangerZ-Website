@@ -13,31 +13,31 @@
                 <p class="text">
                     GameRangerZ <i>(gesprochen: Game Rangers)</i> ist ein Gaming-Clan welcher 2014 gegründet wurde, da wir etwas haben wollten,
                     was uns als Gruppe vereint. Wir kennen uns nun seit über 10 Jahren und spielen fast immer täglich miteinander.
-                    Mit der Gründung von GameRangerZ ging auch schnell unser TeamSpeak-Server an den Start.
+                    Mit der Gründung von GameRangerZ ging auch schnell unser TeamSpeak-Server an den Start. Dieser läuft
+                    seit Beginn ununterbrochen und hat uns schon viele sehr schöne Momente beschert.
                 </p>
                 <p class="text">
                     Mittlerweile hosten wir mehrere Game-Server, Webseiten und Dienste.
                     Wir wollen ja auch nur miteinander zocken und legen dabei großen Wert auf die Gemeinschaft.
                 </p>
                 <p class="text">
-                    Unsere neuste Errungenschaft ist unser <a href="./airsoft">Airsoft-Team</a>, welches sich 2019 gegründet hat.
+                    Gelegentlich Streamen wir auch auf <a href="https://twitch.tv/gamerangerz">Twitch</a> oder laden Videos
+                    auf <a href="https://youtube.com/gamerangerz">YouTube</a> hoch, wenn mal wieder was Amüsantes im Clan
+                    passiert ist. Aktuell hat unser Twitch Kanal über 800 Follower und über 50.000 Aufrufe.
+                </p>
+                <p class="text">
+                    Unsere neuste Errungenschaft ist unser <a href="./airsoft">Airsoft-Team</a>, welches sich im Sommer 2018 gegründet hat.
                     Mit unserm Airsoft Team schaffen wir es, uns auch mal öfters Offline zu sehen, auch wenn wir nicht nah beieinander wohnen.
                 </p>
             </div>
-            <div class="col-lg-4">
-                <figure class="figure">
-                    <img class="figure-img img-fluid rounded" src="https://place-hold.it/500x500" alt="Das Team">
-                    <figcaption class="figure-caption">Das Team</figcaption>
-                </figure>
-            </div>
-        </div>
-        <div class="row">
 {{--            <div class="col-lg-4">--}}
 {{--                <figure class="figure">--}}
 {{--                    <img class="figure-img img-fluid rounded" src="https://place-hold.it/500x500" alt="Das Team">--}}
 {{--                    <figcaption class="figure-caption">Das Team</figcaption>--}}
 {{--                </figure>--}}
 {{--            </div>--}}
+        </div>
+        <div class="row">
             <div class="col-lg-8">
                 <h2>Kann man euch beitreten?</h2>
                 <p class="text">
