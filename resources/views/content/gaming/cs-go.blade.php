@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <img class="img-fluid" src="{{asset("/img/about-bg.webp")}}">
+                <img class="img-fluid" alt="CS:GO Banner" src="{{asset("/img/about-bg.webp")}}">
             </div>
             <div class="col-lg-12 my-5">
                 <h2>Counter Strike - Ein Klassiker</h2>

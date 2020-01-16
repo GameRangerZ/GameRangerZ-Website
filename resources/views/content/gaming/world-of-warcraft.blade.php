@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <img class="img-fluid" src="{{asset("/img/world_of_warcraft.webp")}}">
+                <img class="img-fluid" alt="World of Warcraft Banner" src="{{asset("/img/world_of_warcraft.webp")}}">
             </div>
             <div class="col-lg-8 my-5">
                 <h2>Unsere Gilde &lt;Fremdkörper&gt;</h2>

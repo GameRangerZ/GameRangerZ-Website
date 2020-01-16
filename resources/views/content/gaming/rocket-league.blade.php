@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <img class="img-fluid" src="{{asset("/img/rocket_league.webp")}}">
+                <img class="img-fluid" alt="Rocket League Banner" src="{{asset("/img/rocket_league.webp")}}">
             </div>
             <div class="col-lg-12 my-5">
                 <h2>Game<span class="red">RangerZ</span> sind am ballen</h2>

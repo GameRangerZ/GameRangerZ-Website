@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <img class="img-fluid" src="{{asset("/img/league-of-legends.webp")}}">
+                <img class="img-fluid" alt="League of Legends Banner" src="{{asset("/img/league-of-legends.webp")}}">
             </div>
             <div class="col-lg-12 my-5">
                 <h2>Die Liga der Legenden</h2>

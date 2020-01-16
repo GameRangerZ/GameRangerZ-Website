@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <img class="img-fluid" src="{{asset("/img/contact-bg.webp")}}">
+                <img class="img-fluid" alt="Arma 3 Banner" src="{{asset("/img/contact-bg.webp")}}">
             </div>
             <div class="col-lg-12 my-5">
                 <h2>Der Militärsimulator der alles kann</h2>
@@ -17,7 +17,8 @@
                     ArmA ist mit eins der Spiele mit den meisten Spielstunden bei den GameRangerZ.
                     Ob entspanntes Roleplay, Wastelands, King of the Hill oder Milsim - Wir haben alles schon gespielt.
                     Angefangen hatte es bei uns mit ArmA 2:OA und dann kam der DayZ-Hype und es wurde Mod nach Mod gespielt.
-                    Dem meisten Spaß hatten wir mit DayZ Origins und Overpoch (Epoch & Overwatch).
+                    Dem meisten Spaß hatten wir mit DayZ Origins und Overpoch (Epoch & Overwatch). In den DayZ Mods
+                    konnte man sich seine eigenen Basis bauen und diese dann gegen Spieler und Zombies verteidigen.
                 </p>
                 <p class="text">
                     Mit ArmA 3 kamen sehr viele schöne Dinge ins Spiel und mit "Altis Life" fing es richtig an zu blühen.
