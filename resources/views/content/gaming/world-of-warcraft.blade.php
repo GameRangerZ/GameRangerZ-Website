@@ -11,7 +11,7 @@
             <div class="col-lg-12">
                 <img class="img-fluid" src="{{asset("/img/world_of_warcraft.webp")}}">
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-8 my-5">
                 <h2>Unsere Gilde &lt;Fremdkörper&gt;</h2>
                 <p class="text">
                     Die GameRangerZ sind natürlich auch in World of Warcraft vertreten.
