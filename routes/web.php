@@ -11,15 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PagesController@index');
 
 //Static Content
+Route::get('/about-us', 'PagesController@about_us');
+Route::get('/airsoft' , 'PagesController@airsoft');
+Route::get('/partner' , 'PagesController@partner');
 
-Route::get('/about-us', function () {
-    return view('content.about-us');
-});
+
+
+
 Route::get('/airsoft', function () {
     return view('content.airsoft');
 });
@@ -29,24 +30,11 @@ Route::get('/partner', function () {
 
 
 //Gaming
-
-Route::get('/gaming/rocket-league', function () {
-    return view('content.gaming.rocket-league');
-});
-Route::get('/gaming/league-of-legends', function () {
-    return view('content.gaming.league-of-legends');
-});
-Route::get('/gaming/arma-3', function () {
-    return view('content.gaming.arma-3');
-});
-Route::get('/gaming/counter-strike-global-offensive', function () {
-    return view('content.gaming.cs-go');
-});
-Route::get('/gaming/world-of-warcraft', function () {
-    return view('content.gaming.world-of-warcraft');
-});
-
-
+Route::get('/gaming/rocket-league', 'PagesController@rocket_league');
+Route::get('/gaming/league-of-legends', 'PagesController@league_of_legends');
+Route::get('/gaming/arma-3', 'PagesController@arma3');
+Route::get('/gaming/counter-strike-global-offensive', 'PagesController@csgo');
+Route::get('/gaming/world-of-warcraft', 'PagesController@world_of_warcraft');
 
 //News
 

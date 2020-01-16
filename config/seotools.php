@@ -9,11 +9,11 @@ return [
          * The default configurations to be used by the meta generator.
          */
         'defaults'       => [
-            'title'        => "GameRangerZ.de | Gaming, TeamSpeak, Hosting & More", // set false to total remove
+            'title'        => "GameRangerZ.de | Ein deutscher Clan für Gaming & Airsoft", // set false to total remove
             'titleBefore'  => false, // Put defaults.title before page title, like 'It's Over 9000! - Dashboard'
-            'description'  => 'Du suchst einen Clan für Dich und Deine Freunde oder möchtest einfach mit jemanden zocken? Dann bist du bei uns genau richtig!', // set false to total remove
-            'separator'    => ' - ',
-            'keywords'     => ["gaming","clan","teamspeak"],
+            'description'  => 'GameRangerZ ist ein deutscher Multigaming-Clan welcher 2014 gegründet wurde. Wir kennen uns nun seit über 10 Jahren und spielen fast immer täglich miteinander.', // set false to total remove
+            'separator'    => ' | ',
+            'keywords'     => ["gaming","clan","airsoft","teamspeak"],
             'canonical'    => false, // Set null for using Url::current(), set false to total remove
             'robots'       => false, // Set to 'all', 'none' or any combination of index/noindex and follow/nofollow
         ],
@@ -35,8 +35,8 @@ return [
          * The default configurations to be used by the opengraph generator.
          */
         'defaults' => [
-            'title'       => 'GameRangerZ.de | Gaming, Hosting & More', // set false to total remove
-            'description' => 'Du suchst einen Clan für Dich und Deine Freunde oder möchtest einfach mit jemanden zocken? Dann bist du bei uns genau richtig!', // set false to total remove
+            'title'       => 'GameRangerZ.de | Der Clan für Gaming & Airsoft', // set false to total remove
+            'description' => 'GameRangerZ ist ein deutscher Multigaming-Clan welcher 2014 gegründet wurde. Wir kennen uns nun seit über 10 Jahren und spielen fast immer täglich miteinander.', // set false to total remove
             'url'         => false, // Set null for using Url::current(), set false to total remove
             'type'        => "website",
             'site_name'   => "GameRangerZ.de",
@@ -58,7 +58,7 @@ return [
          */
         'defaults' => [
             'title'       => 'GameRangerZ.de | Gaming, Hosting & More', // set false to total remove
-            'description' => 'Du suchst einen Clan für Dich und Deine Freunde oder möchtest einfach mit jemanden zocken? Dann bist du bei uns genau richtig!', // set false to total remove
+            'description' => 'GameRangerZ ist ein deutscher Multigaming-Clan welcher 2014 gegründet wurde. Wir kennen uns nun seit über 10 Jahren und spielen fast immer täglich miteinander.', // set false to total remove
             'url'         => false, // Set null for using Url::current(), set false to total remove
             'type'        => 'WebPage',
             'images'      => ["https://gamerangerz.de/img/opengraph.png"],
