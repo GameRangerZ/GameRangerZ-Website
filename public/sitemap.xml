@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://gamerangerz.de/</loc>
+  <lastmod>2020-01-16T10:08:23+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://gamerangerz.de/news</loc>
+  <lastmod>2020-01-16T10:08:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamerangerz.de/about-us</loc>
+  <lastmod>2020-01-16T10:08:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamerangerz.de/gaming/arma-3</loc>
+  <lastmod>2020-01-16T10:08:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamerangerz.de/gaming/counter-strike-global-offensive</loc>
+  <lastmod>2020-01-16T10:08:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamerangerz.de/gaming/league-of-legends</loc>
+  <lastmod>2020-01-16T10:08:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamerangerz.de/gaming/rocket-league</loc>
+  <lastmod>2020-01-16T10:08:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamerangerz.de/gaming/world-of-warcraft</loc>
+  <lastmod>2020-01-16T10:08:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamerangerz.de/airsoft</loc>
+  <lastmod>2020-01-16T10:08:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamerangerz.de/partner</loc>
+  <lastmod>2020-01-16T10:08:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamerangerz.de/login</loc>
+  <lastmod>2020-01-16T10:08:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamerangerz.de/register</loc>
+  <lastmod>2020-01-16T10:08:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gamerangerz.de/password/reset</loc>
+  <lastmod>2020-01-16T10:08:23+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>
