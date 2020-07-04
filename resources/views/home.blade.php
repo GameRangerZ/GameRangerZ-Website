@@ -4,25 +4,34 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="alert alert-info">
-                Willkommen zurück, {{$user->name}}!
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
-            </div>
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
         </div>
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
+            <table class="table table-dark">
+                <tbody>
+                    <tr>
+                        <td>Benutzername</td>
+                        <td>{{$user->username}}</td>
+                    </tr>
+                    <tr>
+                        <td>TeamSpeak ID</td>
+                        <td>{{$user->TS3UID}}</td>
+                    </tr>
+                    <tr>
+                        <td>Steam Account</td>
+                        <td>
+                            {{$user->steamid}}
+                            @empty($user->steamid)
+                                <a href="/auth/steam">Mit Steam verbinden...</a>
+                            @endempty
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div class="col-md-4">
             <div class="card">

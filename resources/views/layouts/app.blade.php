@@ -31,12 +31,12 @@
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <div id="app">
         {{menu("main","layouts.nav")}}
-        <main>
+        <main class="mt-5 pt-5">
             @yield('content')
             <!-- Footer -->
                 <footer>
                     <div class="container text-center">
-                        <p>Copyright &#xA9; GameRangerZ 2020</p>
+                        <p>Copyright &#xA9; GameRangerZ {{date("Y")}}</p>
                     </div>
                 </footer>
         </main>

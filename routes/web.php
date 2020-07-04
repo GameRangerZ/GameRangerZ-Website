@@ -43,11 +43,18 @@ Route::get('/news', 'NewsController@index');
 //Users
 
 Route::get('/home/{user}', 'HomeController@index')->name('profile.show');
+Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+Route::get('/dashboard/{user}', 'HomeController@dashboard')->name('dashboard');
 
+Auth::routes([
+    'register' => true, // Registration Routes...
+    'reset' => true, // Password Reset Routes...
+    'verify' => true, // Email Verification Routes...
+]);
 
-
-
-Auth::routes();
+//Steam Auth
+Route::get('auth/steam', 'AuthController@redirectToSteam')->name('auth.steam');
+Route::get('auth/steam/handle', 'AuthController@handle')->name('auth.steam.handle');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

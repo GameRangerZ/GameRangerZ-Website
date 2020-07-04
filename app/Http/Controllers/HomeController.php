@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,17 @@ class HomeController extends Controller
     public function index($user)
     {
         $user = User::find($user);
+        return view('home',['user' => $user]);
+    }
+
+    public function dashboard($user = false)
+    {
+        if(!$user){
+            $user = Auth::user();
+        }else{
+            //User ID vorhanden
+            $user = User::find($user);
+        }
         return view('home',['user' => $user]);
     }
 }
