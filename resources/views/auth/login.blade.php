@@ -56,6 +56,9 @@
                                 <button type="submit" class="btn btn-danger">
                                     {{ __('Login') }}
                                 </button>
+                                <a href="/auth/steam" class="btn btn-dark">
+                                    {{ __('Login with Steam') }}
+                                </a>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link text-danger" href="{{ route('password.request') }}">
