@@ -17,6 +17,7 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "~2.1.0",
+        "lukasz-adamski/laravel-teamspeak3": "1.0.4",
         "tcg/voyager": "1.4.2"
     },
     "require-dev": {

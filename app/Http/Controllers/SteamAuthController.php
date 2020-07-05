@@ -6,7 +6,7 @@ use Invisnik\LaravelSteamAuth\SteamAuth;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+class SteamAuthController extends Controller
 {
     /**
      * The SteamAuth instance.
@@ -23,7 +23,7 @@ class AuthController extends Controller
     protected $redirectURL = '/dashboard';
 
     /**
-     * AuthController constructor.
+     * SteamAuthController constructor.
      *
      * @param SteamAuth $steam
      */

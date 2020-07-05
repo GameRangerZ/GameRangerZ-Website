@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8bf8440f9fbf5e4d4e8b665dadbb80c0",
+    "content-hash": "7609a371a1c87b3e024388fcea825f55",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -2472,6 +2472,104 @@
                 }
             ],
             "time": "2020-05-18T15:13:39+00:00"
+        },
+        {
+            "name": "lukasz-adamski/laravel-teamspeak3",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lukasz-adamski/laravel-teamspeak3.git",
+                "reference": "244494a7e404a3a8a88909a12a2df9e395b5339f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lukasz-adamski/laravel-teamspeak3/zipball/244494a7e404a3a8a88909a12a2df9e395b5339f",
+                "reference": "244494a7e404a3a8a88909a12a2df9e395b5339f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~7.0",
+                "lukasz-adamski/teamspeak3-framework": "~1.0",
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Adams\\TeamSpeak3\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Łukasz Adamski"
+                }
+            ],
+            "description": "Teamspeak 3 PHP Framework Service Provider for Laravel Framework",
+            "keywords": [
+                "api",
+                "framework",
+                "laravel",
+                "serverquery",
+                "teamspeak3",
+                "ts3"
+            ],
+            "support": {
+                "source": "https://github.com/lukasz-adamski/laravel-teamspeak3/tree/1.0.4"
+            },
+            "time": "2020-06-11T09:14:13+00:00"
+        },
+        {
+            "name": "lukasz-adamski/teamspeak3-framework",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lukasz-adamski/teamspeak3-framework.git",
+                "reference": "80e007b92ed7f2cd53bbb31867fc450a91c885d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lukasz-adamski/teamspeak3-framework/zipball/80e007b92ed7f2cd53bbb31867fc450a91c885d0",
+                "reference": "80e007b92ed7f2cd53bbb31867fc450a91c885d0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Adams\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Łukasz Adamski"
+                },
+                {
+                    "name": "Sven 'ScP' Paulsen",
+                    "email": "scp@planetteamspeak.com",
+                    "homepage": "https://www.planetteamspeak.com"
+                }
+            ],
+            "description": "TeamSpeak 3 PHP Framework refactored to be compatible with composer.",
+            "keywords": [
+                "api",
+                "framework",
+                "serverquery",
+                "teamspeak3",
+                "ts3"
+            ],
+            "support": {
+                "source": "https://github.com/lukasz-adamski/teamspeak3-framework/tree/1.0.3"
+            },
+            "time": "2020-06-11T09:26:13+00:00"
         },
         {
             "name": "monolog/monolog",

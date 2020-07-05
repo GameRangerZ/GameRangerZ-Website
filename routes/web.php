@@ -44,7 +44,7 @@ Route::get('/news', 'NewsController@index');
 
 Route::get('/home/{user}', 'HomeController@index')->name('profile.show');
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
-Route::get('/dashboard/{user}', 'HomeController@dashboard')->name('dashboard');
+Route::get('/dashboard/{user}', 'HomeController@dashboard');
 
 Auth::routes([
     'register' => true, // Registration Routes...
@@ -53,8 +53,13 @@ Auth::routes([
 ]);
 
 //Steam Auth
-Route::get('auth/steam', 'AuthController@redirectToSteam')->name('auth.steam');
-Route::get('auth/steam/handle', 'AuthController@handle')->name('auth.steam.handle');
+Route::get('auth/steam', 'SteamAuthController@redirectToSteam')->name('auth.steam');
+Route::get('auth/steam/handle', 'SteamAuthController@handle')->name('auth.steam.handle');
+Route::get('auth/teamspeak', 'TeamSpeakController@FindAccount')->name('auth.teamspeak');
+Route::get('auth/teamspeak/manual', 'TeamSpeakController@ChooseManual')->name('auth.teamspeak.manual');
+Route::POST('auth/teamspeak/handle', 'TeamSpeakController@ClientSubmit')->name('auth.teamspeak.submit');
+Route::POST('auth/teamspeak/verifycode', 'TeamSpeakController@VerifyCode')->name('auth.teamspeak.verifycode');
+
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

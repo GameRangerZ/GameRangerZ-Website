@@ -167,6 +167,8 @@ return [
         TCG\Voyager\VoyagerServiceProvider::class,
         //SEO
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
+        //TeamSpeak
+        Adams\TeamSpeak3\TeamSpeak3ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -231,11 +233,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'SEOMeta'   => Artesaos\SEOTools\Facades\SEOMeta::class,
+        'SEOMeta' => Artesaos\SEOTools\Facades\SEOMeta::class,
         'OpenGraph' => Artesaos\SEOTools\Facades\OpenGraph::class,
-        'Twitter'   => Artesaos\SEOTools\Facades\TwitterCard::class,
-        'JsonLd'   => Artesaos\SEOTools\Facades\JsonLd::class,
+        'Twitter' => Artesaos\SEOTools\Facades\TwitterCard::class,
+        'JsonLd' => Artesaos\SEOTools\Facades\JsonLd::class,
         'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
+        'TeamSpeak3' => Adams\TeamSpeak3\Facades\TeamSpeak3::class,
     ],
 
 ];

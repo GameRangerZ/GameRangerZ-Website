@@ -55,5 +55,8 @@
     "Whoops!": "Ups!",
     "Whoops, something went wrong on our servers.": "Ups, etwas ist schief gelaufen.",
     "Menu": "Menü",
-    "Login with Steam": "Mit Steam anmelden"
+    "Login with Steam": "Mit Steam anmelden",
+    "Retry": "Erneut versuchen",
+    "Abort": "Abbrechen",
+    "Submit": "Abschicken"
 }

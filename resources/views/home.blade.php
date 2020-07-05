@@ -13,23 +13,29 @@
         <div class="col-md-8">
             <table class="table table-dark">
                 <tbody>
-                    <tr>
-                        <td>Benutzername</td>
-                        <td>{{$user->username}}</td>
-                    </tr>
-                    <tr>
-                        <td>TeamSpeak ID</td>
-                        <td>{{$user->TS3UID}}</td>
-                    </tr>
-                    <tr>
-                        <td>Steam Account</td>
-                        <td>
-                            {{$user->steamid}}
-                            @empty($user->steamid)
-                                <a href="/auth/steam">Mit Steam verbinden...</a>
-                            @endempty
-                        </td>
-                    </tr>
+                <tr>
+                    <td>Benutzername</td>
+                    <td>{{$user->username}}</td>
+                </tr>
+                <tr>
+                    <td>TeamSpeak ID</td>
+                    <td>
+                        {{$user->teamspeakuid}}
+                        @empty($user->teamspeakuid)
+                            <a href="{{ route('auth.teamspeak') }}">Mit TeamSpeak verbinden...</a>
+                        @endempty
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Steam Account</td>
+                    <td>
+                        {{$user->steamid}}
+                        @empty($user->steamid)
+                            <a href="{{ route('auth.steam') }}">Mit Steam verbinden...</a>
+                        @endempty
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
