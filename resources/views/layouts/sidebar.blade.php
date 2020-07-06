@@ -41,7 +41,7 @@
                                 @else
                                     <li class="nav-item"><a
                                             class="nav-link" {!! url($subItem->link()) == url()->current() ? 'active' : '' !!}
-                                        " target="{{ $subItem->target }}" href="{{ url($subItem->url) }}
+                                        " target="{{ $subItem->target }}" href="{{ url($subItem->link()) }}
                                         ">{{ $subItem->title }} {!! url($subItem->link()) == url()->current() ? '<span class="sr-only">(current)</span>' : '' !!}</a>
                                     </li>
                                 @endif
@@ -51,7 +51,7 @@
                 </li>
             @else
                 <li class="nav-item {!! url($item->link()) == url()->current() ? 'active' : '' !!}">
-                    <a class="nav-link" target="{{ $item->target }}" href="{{ url($item->url) }}">
+                    <a class="nav-link" target="{{ $item->target }}" href="{{ url($item->link()) }}">
                         <span class="menu-icon">
                             <i class="mdi {{ $item->icon_class }}"></i>
                         </span>

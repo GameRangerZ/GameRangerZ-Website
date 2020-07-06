@@ -15,5 +15,11 @@ class MenusTableSeeder extends Seeder
         Menu::firstOrCreate([
             'name' => 'admin',
         ]);
+        Menu::firstOrCreate([
+            'name' => 'main',
+        ]);
+        Menu::firstOrCreate([
+            'name' => 'intern',
+        ]);
     }
 }
