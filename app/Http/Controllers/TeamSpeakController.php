@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Adams\TeamSpeak3\Adapter\ServerQuery\Exception;
 use App\User;
 use Illuminate\Http\Request;
 use Adams\TeamSpeak3\Facades\TeamSpeak3;
@@ -66,16 +67,25 @@ EOT;
     public function VerifyCode(Request $request)
     {
         $code = $request->input('code');
-
-        if ($code == session()->get('code')) {
+        if ($code == session()->get('ts3code')) {
             //Success
             $user = Auth::user();
             $user->teamspeakuid = session()->get("ts3uid");
             $user->save();
+            //Registriert = 7
+            $client = TeamSpeak3::clientGetByUid($user->teamspeakuid);
+            try {
+                TeamSpeak3::serverGroupClientAdd(7, $client->client_database_id);
+            } catch (Exception $e) {
 
-            session()->forget('code');
+            }
+            session()->forget('ts3code');
             session()->forget('ts3uid');
             return redirect()->route('dashboard');
+        } else {
+            session()->forget('ts3code');
+            session()->forget('ts3uid');
+            return redirect()->route('dashboard')->with('error', 'Der Code stimmt nicht überein.');
         }
     }
 }

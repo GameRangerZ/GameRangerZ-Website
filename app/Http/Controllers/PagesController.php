@@ -40,15 +40,33 @@ class PagesController extends Controller
 
         return view('content.gaming.league-of-legends');
     }
-    public function arma3(){
+
+    public function arma3()
+    {
         SEOTools::setTitle('ArmA 3');
 
         return view('content.gaming.arma-3');
     }
-    public function csgo(){
+
+    public function csgo()
+    {
         SEOTools::setTitle('CS:GO');
 
         return view('content.gaming.cs-go');
+    }
+
+    public function datenschutz()
+    {
+        SEOTools::setTitle('Datenschutz');
+
+        return view('legal.datenschutz');
+    }
+
+    public function impressum()
+    {
+        SEOTools::setTitle('Impressum');
+
+        return view('legal.impressum');
     }
 
 }

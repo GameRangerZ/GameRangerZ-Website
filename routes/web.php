@@ -64,3 +64,7 @@ Route::POST('auth/teamspeak/verifycode', 'TeamSpeakController@VerifyCode')->name
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+//Legal
+Route::get('datenschutz', 'PagesController@datenschutz')->name('datenschutz');
+Route::get('impressum', 'PagesController@impressum')->name('impressum');

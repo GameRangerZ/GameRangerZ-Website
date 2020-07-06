@@ -23,20 +23,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index($user)
-    {
-        $user = User::find($user);
-        return view('home',['user' => $user]);
-    }
 
-    public function dashboard($user = false)
+    public function dashboard()
     {
-        if(!$user){
-            $user = Auth::user();
-        }else{
-            //User ID vorhanden
-            $user = User::find($user);
-        }
-        return view('home',['user' => $user]);
+        $user = Auth::user();
+        return view('dashboard', ['user' => $user]);
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.intern')
 
 @section('content')
     <div class="container">
@@ -19,7 +19,7 @@
                             @csrf
                             <div class="form-group mt-3">
                                 <label for="code">Code aus TeamSpeak</label>
-                                <input id="code" class="form-control" type="text">
+                                <input id="code" name="code" class="form-control" type="text">
                             </div>
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Submit') }}

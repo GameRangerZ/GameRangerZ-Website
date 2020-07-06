@@ -25,25 +25,24 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css" >
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-    <div id="app">
-        {{menu("main","layouts.nav")}}
-        <main class="mt-5 pt-5">
-            @yield('content')
-            <!-- Footer -->
-                <footer>
-                    <div class="container text-center">
-                        <p>Copyright &#xA9; GameRangerZ {{date("Y")}}</p>
-                    </div>
-                </footer>
-        </main>
+<div id="app">
+    {{menu("main","layouts.nav")}}
+    <main role="main" class="container-fluid">
+        @yield('content')
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &#xA9; GameRangerZ {{date("Y")}}</p>
+        </div>
+    </footer>
+</div>
 
-    </div>
 
-
-    <script src="{{ asset('js/jquery.easing.min.js') }}" defer></script>
+<script src="{{ asset('js/jquery.easing.min.js') }}" defer></script>
 </body>
 </html>
