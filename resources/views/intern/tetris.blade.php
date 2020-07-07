@@ -637,8 +637,15 @@
                                                     <h6 class="preview-subject">Highscore</h6>
                                                 </div>
                                                 <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                                    <p class="text-muted"
-                                                       id="myscore">{{$personalscore->max('score')}}</p>
+                                                    <p class="text-muted" id="myscore">
+                                                        @if($personalscore->count() > 0)
+                                                            {{$personalscore->max('score')}}
+                                                        @else
+                                                            0
+                                                        @endif
+
+
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>

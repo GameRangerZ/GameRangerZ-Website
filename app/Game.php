@@ -12,10 +12,7 @@ use Eloquent;
  */
 class Game extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'games';
+    protected $fillable = [
+        'name'
+    ];
 }

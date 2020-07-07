@@ -30,5 +30,21 @@ class InternMenuItemsTableSeeder extends Seeder
                 'order' => 1,
             ])->save();
         }
+
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menu->id,
+            'title' => "Tetris",
+            'url' => '',
+            'route' => 'tetris',
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target' => '_self',
+                'icon_class' => 'mdi-google-controller',
+                'color' => null,
+                'parent_id' => null,
+                'order' => 2,
+            ])->save();
+        }
     }
 }

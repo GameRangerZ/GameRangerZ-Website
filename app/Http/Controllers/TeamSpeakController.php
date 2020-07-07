@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Adams\TeamSpeak3\Adapter\ServerQuery\Exception;
+use App\Event\NewTetrisHighscoreEvent;
 use App\User;
 use App\Game;
 use App\Highscore;
@@ -109,6 +110,10 @@ EOT;
 
         $score = $request->input('score');
         Highscore::create(['score' => $score, 'user_id' => $user->id, 'game_id' => $game->id]);
+
+        if (Highscore::max('score') >= $score) {
+            event(new NewTetrisHighscoreEvent($user));
+        }
 
 
         $highscore = Highscore::selectRaw('*,MAX(score) as score')->orderBy('score', 'desc')->groupBy('user_id')->get();
