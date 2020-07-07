@@ -27,6 +27,6 @@ class HomeController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
-        return view('dashboard', ['user' => $user]);
+        return view('intern.dashboard', ['user' => $user]);
     }
 }

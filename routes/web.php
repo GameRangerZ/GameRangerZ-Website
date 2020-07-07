@@ -33,7 +33,8 @@ Route::get('/news', 'NewsController@index');
 
 Route::get('/home/{user}', 'HomeController@index')->name('profile.show');
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
-Route::get('/dashboard/{user}', 'HomeController@dashboard');
+Route::get('/tetris/', 'TeamSpeakController@tetris')->name('tetris');
+Route::POST('/tetris/submit', 'TeamSpeakController@tetrisSubmit')->name('tetris.submit');
 
 Auth::routes([
     'register' => true, // Registration Routes...

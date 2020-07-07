@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Adams\TeamSpeak3\Adapter\ServerQuery\Exception;
 use App\User;
+use App\Game;
+use App\Highscore;
 use Illuminate\Http\Request;
 use Adams\TeamSpeak3\Facades\TeamSpeak3;
 use Illuminate\Support\Facades\Auth;
@@ -87,5 +89,29 @@ EOT;
             session()->forget('ts3uid');
             return redirect()->route('dashboard')->with('error', 'Der Code stimmt nicht überein.');
         }
+    }
+
+    public function tetris()
+    {
+        $user = Auth::user();
+        $game = Game::firstOrCreate(['name' => 'Tetris']);
+        $highscore = Highscore::selectRaw('*,MAX(score) as score')->orderBy('score', 'desc')->groupBy('user_id')->get();
+
+        $personalscore = Highscore::where('user_id', $user->id)->orderBy('score', 'desc')->get();
+
+        return view('intern.tetris', ['user' => $user, 'game' => $game, 'highscore' => $highscore, 'personalscore' => $personalscore]);
+    }
+
+    public function tetrisSubmit(Request $request)
+    {
+        $user = Auth::user();
+        $game = Game::firstOrCreate(['name' => 'Tetris']);
+
+        $score = $request->input('score');
+        Highscore::create(['score' => $score, 'user_id' => $user->id, 'game_id' => $game->id]);
+
+
+        $highscore = Highscore::selectRaw('*,MAX(score) as score')->orderBy('score', 'desc')->groupBy('user_id')->get();
+        return view('intern.leaderboard', ['user' => $user, 'highscore' => $highscore]);
     }
 }
