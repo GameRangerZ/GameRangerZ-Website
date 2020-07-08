@@ -32,6 +32,7 @@ class TeamSpeakUIDAddedEventListener
         $sinusbot->login(env('MUSICBOT_USERNAME'), env('MUSICBOT_PASSWORD'));
         $user = $sinusbot->getUserByName($event->user->username);
         $event->user->refresh();
-        $sinusbot->editUser($user->uuid, null, $event->user->teamspeakuid, null, 61445);
+        $user->setIdentity($event->user->teamspeakuid);
+        $user->setPrivileges(61445);
     }
 }
