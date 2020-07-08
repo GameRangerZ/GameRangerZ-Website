@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -22,9 +23,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index($user)
+
+    public function dashboard()
     {
-        $user = User::find($user);
-        return view('home',['user' => $user]);
+        $user = Auth::user();
+        return view('intern.dashboard', ['user' => $user]);
     }
 }

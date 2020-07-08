@@ -25,25 +25,26 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css" >
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/cookie.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-    <div id="app">
-        {{menu("main","layouts.nav")}}
-        <main>
-            @yield('content')
-            <!-- Footer -->
-                <footer>
-                    <div class="container text-center">
-                        <p>Copyright &#xA9; GameRangerZ 2020</p>
-                    </div>
-                </footer>
-        </main>
+<div id="app">
+    {{menu("main","layouts.nav")}}
+    <main role="main">
+        @yield('content')
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &#xA9; GameRangerZ {{date("Y")}}</p>
+        </div>
+    </footer>
+</div>
 
-    </div>
+@include('cookieConsent::index')
 
-
-    <script src="{{ asset('js/jquery.easing.min.js') }}" defer></script>
+<script src="{{ asset('js/jquery.easing.min.js') }}" defer></script>
 </body>
 </html>

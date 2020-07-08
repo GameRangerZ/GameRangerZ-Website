@@ -18,6 +18,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'App\Event\NewTetrisHighscoreEvent' => [
+            'App\Event\NewTetrisHighscoreEventListener'
+        ],
+        'App\Event\TeamSpeakUIDAddedEvent' => [
+            'App\Event\TeamSpeakUIDAddedEventListener'
+        ],
     ];
 
     /**

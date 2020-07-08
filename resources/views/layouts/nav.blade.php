@@ -13,7 +13,8 @@
                 @foreach($items as $item)
                     @if($item->children->count())
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{{ url($item->url) }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="{{ url($item->url) }}" id="navbarDropdown"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ $item->title }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -21,14 +22,17 @@
                                     @if($subItem->title == 'divider')
                                         <div class="dropdown-divider"></div>
                                     @else
-                                        <a class="dropdown-item {!! url($subItem->link()) == url()->current() ? 'active' : '' !!}" target="{{ $subItem->target }}" href="{{ url($subItem->url) }}">{{ $subItem->title }} {!! url($subItem->link()) == url()->current() ? '<span class="sr-only">(current)</span>' : '' !!}</a>
+                                        <a class="dropdown-item {!! url($subItem->link()) == url()->current() ? 'active' : '' !!}"
+                                           target="{{ $subItem->target }}"
+                                           href="{{ url($subItem->link()) }}">{{ $subItem->title }} {!! url($subItem->link()) == url()->current() ? '<span class="sr-only">(current)</span>' : '' !!}</a>
                                     @endif
                                 @endforeach
                             </div>
                         </li>
                     @else
                         <li class="nav-item {!! url($item->link()) == url()->current() ? 'active' : '' !!}">
-                            <a class="nav-link" target="{{ $item->target }}" href="{{ url($item->url) }}">{{ $item->title }} {!! url($item->link()) == url()->current() ? '<span class="sr-only">(current)</span>' : '' !!}</a>
+                            <a class="nav-link" target="{{ $item->target }}"
+                               href="{{ url($item->link()) }}">{{ $item->title }} {!! url($item->link()) == url()->current() ? '<span class="sr-only">(current)</span>' : '' !!}</a>
                         </li>
                     @endif
                 @endforeach
@@ -48,11 +52,15 @@
                     @endif
                 @else
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->username }} <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('dashboard') }}">
+                                Dashboard
+                            </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
