@@ -46,5 +46,37 @@ class InternMenuItemsTableSeeder extends Seeder
                 'order' => 2,
             ])->save();
         }
+
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menu->id,
+            'title' => "Email",
+            'url' => 'https://mail.gamerangerz.de/',
+            'route' => null,
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target' => '_blank',
+                'icon_class' => 'mdi-email',
+                'color' => null,
+                'parent_id' => null,
+                'order' => 3,
+            ])->save();
+        }
+
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menu->id,
+            'title' => "Musicbot",
+            'url' => 'https://musicbot.gamerangerz.de/',
+            'route' => null,
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target' => '_blank',
+                'icon_class' => 'mdi-music-note',
+                'color' => null,
+                'parent_id' => null,
+                'order' => 4,
+            ])->save();
+        }
     }
 }

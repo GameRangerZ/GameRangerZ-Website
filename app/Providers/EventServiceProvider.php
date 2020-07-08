@@ -21,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Event\NewTetrisHighscoreEvent' => [
             'App\Event\NewTetrisHighscoreEventListener'
         ],
+        'App\Event\TeamSpeakUIDAddedEvent' => [
+            'App\Event\TeamSpeakUIDAddedEventListener'
+        ],
     ];
 
     /**

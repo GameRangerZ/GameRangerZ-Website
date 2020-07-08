@@ -56,14 +56,14 @@
                                 <button type="submit" class="btn btn-danger">
                                     {{ __('Login') }}
                                 </button>
-                                <a href="/auth/steam" class="btn btn-dark">
-                                    {{ __('Login with Steam') }}
-                                </a>
+                                <a href="/auth/steam">
+                                    <img alt="{{ __('Login with Steam') }}" src="{{asset('/img/sits_01.png')}}">
+                                    </img>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link text-danger" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
+                                    @if (Route::has('password.request'))
+                                        <a class="btn btn-link text-danger" href="{{ route('password.request') }}">
+                                            {{ __('Forgot Your Password?') }}
+                                        </a>
                                 @endif
                             </div>
                         </div>

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mailbox;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use SinusBot\API;
 
 class RegisterController extends Controller
 {
@@ -64,10 +67,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        Mailbox::create([
+            'domain_id' => 1,
+            'email' => $data['username'] . "@gamerangerz.de",
+            'password' => crypt($data['password'], sprintf('$6$%s$', substr(bin2hex(openssl_random_pseudo_bytes(16)), 0, 16))),
+            'user_id' => $user->id
+        ]);
+
+        $sinusbot = new API(env("MUSICBOT_URI"));
+        $sinusbot->login(env('MUSICBOT_USERNAME'), env('MUSICBOT_PASSWORD'));
+        $sinusbot->addUser($user->username, $data['password'], 61445);
+
+        return $user;
     }
 }

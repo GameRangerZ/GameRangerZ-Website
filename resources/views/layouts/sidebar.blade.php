@@ -50,7 +50,7 @@
                     </div>
                 </li>
             @else
-                <li class="nav-item {!! url($item->link()) == url()->current() ? 'active' : '' !!}">
+                <li class="nav-item menu-items {!! url($item->link()) == url()->current() ? 'active' : '' !!}">
                     <a class="nav-link" target="{{ $item->target }}" href="{{ url($item->link()) }}">
                         <span class="menu-icon">
                             <i class="mdi {{ $item->icon_class }}"></i>

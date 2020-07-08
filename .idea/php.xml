@@ -125,6 +125,7 @@
       <path value="$PROJECT_DIR$/vendor/lukasz-adamski/teamspeak3-framework" />
       <path value="$PROJECT_DIR$/vendor/lukasz-adamski/laravel-teamspeak3" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-cookie-consent" />
+      <path value="$PROJECT_DIR$/vendor/sinusbot/sinusbot-api-php" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

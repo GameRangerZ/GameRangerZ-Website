@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Adams\TeamSpeak3\Adapter\ServerQuery\Exception;
 use App\Event\NewTetrisHighscoreEvent;
+use App\Event\TeamSpeakUIDAddedEvent;
 use App\User;
 use App\Game;
 use App\Highscore;
@@ -82,6 +83,7 @@ EOT;
             } catch (Exception $e) {
 
             }
+            event(new TeamSpeakUIDAddedEvent($user));
             session()->forget('ts3code');
             session()->forget('ts3uid');
             return redirect()->route('dashboard');
@@ -95,12 +97,17 @@ EOT;
     public function tetris()
     {
         $user = Auth::user();
-        $game = Game::firstOrCreate(['name' => 'Tetris']);
-        $highscore = Highscore::selectRaw('*,MAX(score) as score')->orderBy('score', 'desc')->groupBy('user_id')->get();
 
-        $personalscore = Highscore::where('user_id', $user->id)->orderBy('score', 'desc')->get();
+        if (empty($user->teamspeakuid)) {
+            return redirect()->route('dashboard')->with('error', 'Füge zuerst deine TeamSpeak Identität hinzu!');
+        } else {
+            $game = Game::firstOrCreate(['name' => 'Tetris']);
+            $highscore = Highscore::selectRaw('*,MAX(score) as score')->orderBy('score', 'desc')->groupBy('user_id')->get();
 
-        return view('intern.tetris', ['user' => $user, 'game' => $game, 'highscore' => $highscore, 'personalscore' => $personalscore]);
+            $personalscore = Highscore::where('user_id', $user->id)->orderBy('score', 'desc')->get();
+
+            return view('intern.tetris', ['user' => $user, 'game' => $game, 'highscore' => $highscore, 'personalscore' => $personalscore]);
+        }
     }
 
     public function tetrisSubmit(Request $request)

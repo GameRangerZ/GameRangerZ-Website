@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f84ad753460f146027b89071a1ef896",
+    "content-hash": "ce73cfb07346b10dd778a833fccd6f0e",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -3593,6 +3593,58 @@
                 "source": "https://github.com/Seldaek/phar-utils/tree/1.1.0"
             },
             "time": "2020-02-14T15:25:33+00:00"
+        },
+        {
+            "name": "sinusbot/sinusbot-api-php",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SinusBot/api-php.git",
+                "reference": "8d790c72644dbeda5afcfb9a8e830b53c9c6619d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SinusBot/api-php/zipball/8d790c72644dbeda5afcfb9a8e830b53c9c6619d",
+                "reference": "8d790c72644dbeda5afcfb9a8e830b53c9c6619d",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "2.*",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SinusBot\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Max Schmitt",
+                    "email": "max@schmitt.mx"
+                },
+                {
+                    "name": "Manuel Hettche",
+                    "email": "info@ts3index.com"
+                }
+            ],
+            "description": "PHP Wrapper to communicate with the SinusBot API.",
+            "homepage": "https://github.com/SinusBot/api-php",
+            "keywords": [
+                "api",
+                "http",
+                "php",
+                "sinusbot"
+            ],
+            "support": {
+                "issues": "https://github.com/SinusBot/api-php/issues",
+                "source": "https://github.com/SinusBot/api-php/tree/master"
+            },
+            "time": "2018-09-11T18:20:53+00:00"
         },
         {
             "name": "spatie/laravel-cookie-consent",
