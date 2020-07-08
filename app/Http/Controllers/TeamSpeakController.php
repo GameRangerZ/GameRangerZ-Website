@@ -118,7 +118,7 @@ EOT;
         $score = $request->input('score');
         Highscore::create(['score' => $score, 'user_id' => $user->id, 'game_id' => $game->id]);
 
-        if (Highscore::max('score') >= $score) {
+        if ($score >= Highscore::max('score')) {
             event(new NewTetrisHighscoreEvent($user));
         }
 
