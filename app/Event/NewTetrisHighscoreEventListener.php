@@ -29,19 +29,18 @@ class NewTetrisHighscoreEventListener
     public function handle(NewTetrisHighscoreEvent $event)
     {
         if (isset($event->user->teamspeakuid)) {
-            $client = TeamSpeak3::clientGetByUid($event->user->teamspeakuid);
+            $clientID = TeamSpeak3::clientFindDb($event->user->teamspeakuid, true)[0];
             $AlreadySet = false;
             $sgmember = TeamSpeak3::serverGroupClientList(28);
             foreach ($sgmember as $member) {
-                $member = TeamSpeak3::clientGetByUid($member['client_unique_identifier']);
-                if ($client->client_database_id != $member->client_database_id) {
-                    TeamSpeak3::serverGroupClientDel(28, $member->client_database_id);
+                if ($clientID != $member["cldbid"]) {
+                    TeamSpeak3::serverGroupClientDel(28, $member["cldbid"]);
                 } else {
                     $AlreadySet = true;
                 }
             }
             if (!$AlreadySet) {
-                TeamSpeak3::serverGroupClientAdd(28, $client->client_database_id);
+                TeamSpeak3::serverGroupClientAdd(28, $clientID);
             }
         }
     }
