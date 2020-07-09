@@ -40,6 +40,13 @@
                                     border-radius: 10px;
                                 }
 
+                                #hold {
+                                    display: block;
+                                    margin: 20px auto;
+                                    background-color: #383f51;
+                                    border-radius: 10px;
+                                }
+
                                 #score {
                                     color: white;
                                     font-weight: bold;
@@ -67,6 +74,11 @@
                                     height: 150px;
                                 }
 
+                                #hold {
+                                    width: 150px;
+                                    height: 150px;
+                                }
+
                                 #canvas {
                                     width: 300px;
                                     height: 600px;
@@ -78,6 +90,7 @@
                                             starten</a></p>
                                     <p>
                                         <canvas id="upcoming"></canvas>
+                                        <canvas id="hold"></canvas>
                                     </p>
                                     <p>Punkte <span id="score">00000</span></p>
                                     <p>Reihen <span id="rows">0</span></p>
@@ -122,6 +135,11 @@
                                     return choices[Math.round(random(0, choices.length - 1))];
                                 }
 
+                                const hex2rgba = (hex, alpha = 1) => {
+                                    const [r, g, b] = hex.match(/\w\w/g).map(x => parseInt(x, 16));
+                                    return `rgba(${r},${g},${b},${alpha})`;
+                                };
+
                                 if (!window.requestAnimationFrame) { // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
                                     window.requestAnimationFrame = window.webkitRequestAnimationFrame ||
                                         window.mozRequestAnimationFrame ||
@@ -136,16 +154,38 @@
                                 // game constants
                                 //-------------------------------------------------------------------------
 
-                                var KEY = {ESC: 27, SPACE: 32, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40},
-                                    DIR = {UP: 0, RIGHT: 1, DOWN: 2, LEFT: 3, MIN: 0, MAX: 3},
+                                var KEY = {
+                                        ESC: 27,
+                                        SPACE: 32,
+                                        ENTER: 13,
+                                        LEFT: 37,
+                                        UP: 38,
+                                        RIGHT: 39,
+                                        DOWN: 40,
+                                        C: 67,
+                                        Y: 89
+                                    },
+                                    DIR = {
+                                        UP: 0,
+                                        RIGHT: 1,
+                                        DOWN: 2,
+                                        LEFT: 3,
+                                        MIN: 0,
+                                        MAX: 3,
+                                        DROP: 4,
+                                        SWAP: 5,
+                                        REVERSE: 6
+                                    },
                                     canvas = get('canvas'),
                                     ctx = canvas.getContext('2d'),
                                     ucanvas = get('upcoming'),
                                     uctx = ucanvas.getContext('2d'),
+                                    hcanvas = get('hold'),
+                                    hctx = hcanvas.getContext('2d'),
                                     speed = {start: 0.6, decrement: 0.005, min: 0.1}, // how long before piece drops by 1 row (seconds)
-                                    nx = 10, // width of tetris court (in blocks)
-                                    ny = 20, // height of tetris court (in blocks)
-                                    nu = 5;  // width/height of upcoming preview (in blocks)
+                                    TetrisBlockWidth = 10, // width of tetris court (in blocks)
+                                    TetrisBlockHeight = 20, // height of tetris court (in blocks)
+                                    UpcomingBlockSize = 5;  // width/height of upcoming preview (in blocks)
 
                                 //-------------------------------------------------------------------------
                                 // game variables (initialized during reset)
@@ -155,13 +195,16 @@
                                     blocks,        // 2 dimensional array (nx*ny) representing tetris court - either empty block or occupied by a 'piece'
                                     actions,       // queue of user actions (inputs)
                                     playing,       // true|false - game is in progress
-                                    dt,            // time since starting this game
+                                    TimeSinceStart,// time since starting this game
                                     current,       // the current piece
+                                    ghost,         // the ghost piece
                                     next,          // the next piece
+                                    hold,          // the hold piece
                                     score,         // the current score
                                     vscore,        // the currently displayed score (it catches up to score in small chunks - like a spinning slot machine)
                                     rows,          // number of completed rows in the current game
-                                    step;          // how long before current piece drops by 1 row
+                                    step,          // how long before current piece drops by 1 row
+                                    NoSwap;        // Flag if Blocks where swapped
 
                                 //-------------------------------------------------------------------------
                                 // tetris pieces
@@ -210,7 +253,7 @@
                                 function occupied(type, x, y, dir) {
                                     var result = false
                                     eachblock(type, x, y, dir, function (x, y) {
-                                        if ((x < 0) || (x >= nx) || (y < 0) || (y >= ny) || getBlock(x, y))
+                                        if ((x < 0) || (x >= TetrisBlockWidth) || (y < 0) || (y >= TetrisBlockHeight) || getBlock(x, y))
                                             result = true;
                                     });
                                     return result;
@@ -230,7 +273,12 @@
                                     if (pieces.length == 0)
                                         pieces = [i, i, i, i, j, j, j, j, l, l, l, l, o, o, o, o, s, s, s, s, t, t, t, t, z, z, z, z];
                                     var type = pieces.splice(random(0, pieces.length - 1), 1)[0];
-                                    return {type: type, dir: DIR.UP, x: Math.round(random(0, nx - type.size)), y: 0};
+                                    return {
+                                        type: type,
+                                        dir: DIR.UP,
+                                        x: Math.round(random(0, TetrisBlockWidth - type.size)),
+                                        y: 0
+                                    };
                                 }
 
 
@@ -268,10 +316,13 @@
                                     canvas.height = canvas.clientHeight; // (ditto)
                                     ucanvas.width = ucanvas.clientWidth;
                                     ucanvas.height = ucanvas.clientHeight;
-                                    dx = canvas.width / nx; // pixel size of a single tetris block
-                                    dy = canvas.height / ny; // (ditto)
+                                    hcanvas.width = hcanvas.clientWidth;
+                                    hcanvas.height = hcanvas.clientHeight;
+                                    dx = canvas.width / TetrisBlockWidth; // pixel size of a single tetris block
+                                    dy = canvas.height / TetrisBlockHeight; // (ditto)
                                     invalidate();
                                     invalidateNext();
+                                    invalidateHold();
                                 }
 
                                 function keydown(ev) {
@@ -294,12 +345,24 @@
                                                 actions.push(DIR.DOWN);
                                                 handled = true;
                                                 break;
+                                            case KEY.SPACE:
+                                                actions.push(DIR.DROP);
+                                                handled = true;
+                                                break;
+                                            case KEY.C:
+                                                actions.push(DIR.SWAP);
+                                                handled = true;
+                                                break;
+                                            case KEY.Y:
+                                                actions.push(DIR.REVERSE);
+                                                handled = true;
+                                                break;
                                             case KEY.ESC:
                                                 lose();
                                                 handled = true;
                                                 break;
                                         }
-                                    } else if (ev.keyCode == KEY.SPACE) {
+                                    } else if (ev.keyCode == KEY.ENTER) {
                                         play();
                                         handled = true;
                                     }
@@ -359,6 +422,12 @@
                                     setScore(0);
                                 }
 
+                                function clearHold() {
+                                    hold = null;
+                                    NoSwap = true;
+                                }
+
+
                                 function clearRows() {
                                     setRows(0);
                                 }
@@ -402,12 +471,35 @@
                                     invalidateNext();
                                 }
 
+                                function setHoldPiece(piece) {
+                                    hold = piece;
+                                    invalidateHold();
+                                }
+
+                                function swapHold() {
+                                    if (NoSwap) {
+                                        NoSwap = false;
+                                        if (hold) {
+                                            //we have a piece
+                                            temp = current;
+                                            setCurrentPiece(hold);
+                                            setHoldPiece(temp);
+                                        } else {
+                                            setHoldPiece(current);
+                                            setCurrentPiece();
+                                        }
+                                        hold.y = 0;
+                                        hold.x = Math.round(random(0, TetrisBlockWidth - hold.type.size));
+                                    }
+                                }
+
                                 function reset() {
-                                    dt = 0;
+                                    TimeSinceStart = 0;
                                     clearActions();
                                     clearBlocks();
                                     clearRows();
                                     clearScore();
+                                    clearHold();
                                     setCurrentPiece(next);
                                     setNextPiece();
                                 }
@@ -417,9 +509,9 @@
                                         if (vscore < score)
                                             setVisualScore(vscore + 1);
                                         handle(actions.shift());
-                                        dt = dt + idt;
-                                        if (dt > step) {
-                                            dt = dt - step;
+                                        TimeSinceStart = TimeSinceStart + idt;
+                                        if (TimeSinceStart > step) {
+                                            TimeSinceStart = TimeSinceStart - step;
                                             drop();
                                         }
                                     }
@@ -438,6 +530,15 @@
                                             break;
                                         case DIR.DOWN:
                                             drop();
+                                            break;
+                                        case DIR.DROP:
+                                            quickdrop();
+                                            break;
+                                        case DIR.SWAP:
+                                            swapHold();
+                                            break;
+                                        case DIR.REVERSE:
+                                            reverse_rotate();
                                             break;
                                     }
                                 }
@@ -465,8 +566,29 @@
                                     }
                                 }
 
+                                function moveGhostDown() {
+                                    hasSpace = true;
+                                    var x = ghost.x, y = ghost.y;
+                                    while (hasSpace) {
+                                        y = y + 1;
+                                        if (unoccupied(ghost.type, x, y, ghost.dir)) {
+                                            ghost.y = y;
+                                        } else {
+                                            hasSpace = false;
+                                        }
+                                    }
+                                }
+
                                 function rotate() {
                                     var newdir = (current.dir == DIR.MAX ? DIR.MIN : current.dir + 1);
+                                    if (unoccupied(current.type, current.x, current.y, newdir)) {
+                                        current.dir = newdir;
+                                        invalidate();
+                                    }
+                                }
+
+                                function reverse_rotate() {
+                                    var newdir = (current.dir == DIR.MIN ? DIR.MAX : current.dir - 1);
                                     if (unoccupied(current.type, current.x, current.y, newdir)) {
                                         current.dir = newdir;
                                         invalidate();
@@ -480,9 +602,29 @@
                                         removeLines();
                                         setCurrentPiece(next);
                                         setNextPiece(randomPiece());
+                                        NoSwap = true;
                                         clearActions();
                                         if (occupied(current.type, current.x, current.y, current.dir)) {
                                             lose();
+                                        }
+                                    }
+                                }
+
+                                function quickdrop() {
+                                    hasSpace = true;
+                                    while (hasSpace) {
+                                        if (!move(DIR.DOWN)) {
+                                            hasSpace = false;
+                                            addScore(10);
+                                            dropPiece();
+                                            removeLines();
+                                            setCurrentPiece(next);
+                                            setNextPiece(randomPiece());
+                                            clearActions();
+                                            NoSwap = true;
+                                            if (occupied(current.type, current.x, current.y, current.dir)) {
+                                                lose();
+                                            }
                                         }
                                     }
                                 }
@@ -495,15 +637,18 @@
 
                                 function removeLines() {
                                     var x, y, complete, n = 0;
-                                    for (y = ny; y > 0; --y) {
+                                    // 20..1
+                                    for (y = TetrisBlockHeight; y > 0; --y) {
                                         complete = true;
-                                        for (x = 0; x < nx; ++x) {
-                                            if (!getBlock(x, y))
+                                        //0..9
+                                        for (x = 0; x < TetrisBlockWidth; ++x) {
+                                            if (!getBlock(x, y)) {
                                                 complete = false;
+                                            }
                                         }
                                         if (complete) {
                                             removeLine(y);
-                                            y = y + 1; // recheck same line
+                                            y = y + 1; // recheck same line because of copy
                                             n++;
                                         }
                                     }
@@ -513,11 +658,15 @@
                                     }
                                 }
 
+                                //Removes Line and copys above one
                                 function removeLine(n) {
                                     var x, y;
+                                    //n..0
                                     for (y = n; y >= 0; --y) {
-                                        for (x = 0; x < nx; ++x)
+                                        //0..9
+                                        for (x = 0; x < TetrisBlockWidth; ++x) {
                                             setBlock(x, y, (y == 0) ? null : getBlock(x, y - 1));
+                                        }
                                     }
                                 }
 
@@ -535,6 +684,10 @@
                                     invalid.next = true;
                                 }
 
+                                function invalidateHold() {
+                                    invalid.hold = true;
+                                }
+
                                 function invalidateScore() {
                                     invalid.score = true;
                                 }
@@ -549,6 +702,7 @@
                                     ctx.translate(0.5, 0.5); // for crisp 1px black lines
                                     drawCourt();
                                     drawNext();
+                                    drawHold();
                                     drawScore();
                                     drawRows();
                                     ctx.restore();
@@ -557,31 +711,66 @@
                                 function drawCourt() {
                                     if (invalid.court) {
                                         ctx.clearRect(0, 0, canvas.width, canvas.height);
-                                        if (playing)
-                                            drawPiece(ctx, current.type, current.x, current.y, current.dir);
+                                        if (playing) {
+                                            ghost = Object.assign({}, current);
+                                            drawPiece(ctx, current.type, current.x, current.y, current.dir, true);
+                                            moveGhostDown();
+                                            drawGhost(ctx, ghost.type, ghost.x, ghost.y, ghost.dir);
+                                        }
                                         var x, y, block;
-                                        for (y = 0; y < ny; y++) {
-                                            for (x = 0; x < nx; x++) {
+                                        for (y = 0; y < TetrisBlockHeight; y++) {
+                                            for (x = 0; x < TetrisBlockWidth; x++) {
                                                 if (block = getBlock(x, y))
                                                     drawBlock(ctx, x, y, block.color);
                                             }
                                         }
-                                        ctx.strokeRect(0, 0, nx * dx - 1, ny * dy - 1); // court boundary
+                                        ctx.strokeRect(0, 0, TetrisBlockWidth * dx - 1, TetrisBlockHeight * dy - 1); // court boundary
                                         invalid.court = false;
                                     }
                                 }
 
                                 function drawNext() {
                                     if (invalid.next) {
-                                        var padding = (nu - next.type.size) / 2; // half-arsed attempt at centering next piece display
+                                        var padding = (UpcomingBlockSize - next.type.size) / 2; // half-arsed attempt at centering next piece display
                                         uctx.save();
                                         uctx.translate(0.5, 0.5);
-                                        uctx.clearRect(0, 0, nu * dx, nu * dy);
+                                        uctx.clearRect(0, 0, UpcomingBlockSize * dx, UpcomingBlockSize * dy);
+                                        uctx.lineWidth = 1;
                                         drawPiece(uctx, next.type, padding, padding, next.dir);
                                         uctx.strokeStyle = 'black';
-                                        uctx.strokeRect(0, 0, nu * dx - 1, nu * dy - 1);
+                                        uctx.strokeRect(0, 0, UpcomingBlockSize * dx - 1, UpcomingBlockSize * dy - 1);
                                         uctx.restore();
+                                        uctx.font = "30px Calibri";
+                                        uctx.fillStyle = "#fff";
+                                        uctx.textAlign = "center";
+                                        uctx.lineWidth = 3;
+                                        uctx.strokeText("Next", ucanvas.width / 2, 25);
+                                        uctx.fillText("Next", ucanvas.width / 2, 25);
                                         invalid.next = false;
+                                    }
+                                }
+
+                                function drawHold() {
+                                    if (invalid.hold) {
+
+                                        hctx.save();
+                                        hctx.translate(0.5, 0.5);
+                                        hctx.clearRect(0, 0, UpcomingBlockSize * dx, UpcomingBlockSize * dy);
+                                        if (hold) {
+                                            var padding = (UpcomingBlockSize - hold.type.size) / 2; // half-arsed attempt at centering next piece display
+                                            hctx.lineWidth = 1;
+                                            drawPiece(hctx, hold.type, padding, padding, hold.dir);
+                                            hctx.strokeStyle = 'black';
+                                            hctx.strokeRect(0, 0, UpcomingBlockSize * dx - 1, UpcomingBlockSize * dy - 1);
+                                        }
+                                        hctx.restore();
+                                        hctx.font = "30px Calibri";
+                                        hctx.fillStyle = "#fff";
+                                        hctx.textAlign = "center";
+                                        hctx.lineWidth = 3;
+                                        hctx.strokeText("Hold", ucanvas.width / 2, 25);
+                                        hctx.fillText("Hold", ucanvas.width / 2, 25);
+                                        invalid.hold = false;
                                     }
                                 }
 
@@ -602,6 +791,12 @@
                                 function drawPiece(ctx, type, x, y, dir) {
                                     eachblock(type, x, y, dir, function (x, y) {
                                         drawBlock(ctx, x, y, type.color);
+                                    });
+                                }
+
+                                function drawGhost(ctx, type, x, y, dir) {
+                                    eachblock(type, x, y, dir, function (x, y) {
+                                        drawBlock(ctx, x, y, hex2rgba(type.color, 0.1));
                                     });
                                 }
 
@@ -643,15 +838,13 @@
                                                         @else
                                                             0
                                                         @endif
-
-
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="preview-list">
-                                        <div class="preview-item border-bottom">
+                                        <div class="preview-item">
                                             <div class="preview-thumbnail">
                                                 <div class="preview-icon bg-info rounded-circle">
                                                     <i class="mdi mdi-repeat"></i>
@@ -669,6 +862,78 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row mt-5">
+                                <div class="d-flex flex-row justify-content-between">
+                                    <h4 class="card-title mb-1">Tastaturbelegung</h4>
+                                </div>
+                                <div class="col-12 mt-2">
+                                    <div class="preview-list">
+                                        <div class="preview-item border-bottom">
+                                            <div class="preview-item-content d-sm-flex flex-grow">
+                                                <div class="flex-grow">
+                                                    <h6 class="preview-subject">Pfeiltasten</h6>
+                                                </div>
+                                                <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                                                    <p class="text-muted">Block bewegen</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="preview-list">
+                                        <div class="preview-item border-bottom">
+                                            <div class="preview-item-content d-sm-flex flex-grow">
+                                                <div class="flex-grow">
+                                                    <h6 class="preview-subject">Enter</h6>
+                                                </div>
+                                                <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                                                    <p class="text-muted">Spiel starten</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="preview-list">
+                                        <div class="preview-item border-bottom">
+                                            <div class="preview-item-content d-sm-flex flex-grow">
+                                                <div class="flex-grow">
+                                                    <h6 class="preview-subject">C</h6>
+                                                </div>
+                                                <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                                                    <p class="text-muted">Block auf Hold setzen</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="preview-list">
+                                        <div class="preview-item">
+                                            <div class="preview-item-content d-sm-flex flex-grow">
+                                                <div class="flex-grow">
+                                                    <h6 class="preview-subject">Y</h6>
+                                                </div>
+                                                <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                                                    <p class="text-muted">Block <span class="text-info"
+                                                                                      data-toggle="tooltip"
+                                                                                      data-placement="bottom"
+                                                                                      title="counter clockwise, englisch für: „gegen den Uhrzeigersinn“">CCW</span>
+                                                        drehen</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="preview-list">
+                                        <div class="preview-item">
+                                            <div class="preview-item-content d-sm-flex flex-grow">
+                                                <div class="flex-grow">
+                                                    <h6 class="preview-subject">Leertaste</h6>
+                                                </div>
+                                                <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                                                    <p class="text-muted">Block schnell fallen lassen</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
