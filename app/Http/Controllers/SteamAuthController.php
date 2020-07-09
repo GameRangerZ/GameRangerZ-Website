@@ -56,6 +56,7 @@ class SteamAuthController extends Controller
                 $user = $this->findUserOrUpdate($info);
                 if (!is_null($user)) {
                     Auth::login($user, true);
+                    $user->syncBadges();
 
                     return redirect($this->redirectURL); // redirect to site
                 } else {

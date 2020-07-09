@@ -3,6 +3,8 @@
 namespace App\Event;
 
 use App\Event\NewTetrisHighscoreEvent;
+use App\Gamify\Points\AddedTeamSpeak;
+use App\Gamify\Points\GotTetrisHighscore;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\User;
@@ -28,6 +30,7 @@ class NewTetrisHighscoreEventListener
      */
     public function handle(NewTetrisHighscoreEvent $event)
     {
+        $event->user->syncBadges();
         if (isset($event->user->teamspeakuid)) {
             $clientID = TeamSpeak3::clientFindDb($event->user->teamspeakuid, true)[0];
             $AlreadySet = false;

@@ -2,6 +2,7 @@
 
 namespace App\Event;
 
+use App\Highscore;
 use App\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -16,15 +17,17 @@ class NewTetrisHighscoreEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $user;
+    public $highscore;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(User $user, Highscore $highscore)
     {
         $this->user = $user;
+        $this->highscore = $highscore;
     }
 
     /**

@@ -8,6 +8,29 @@
     </div>
     <div class="row">
         <div class="col-md-8 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-row justify-content-between">
+                        <h4 class="display-5 mb-1">Moin {{$user->username}},</h4>
+                    </div>
+                    <p class="mt-3">
+                        aktuell ist das GameRangerZ-Dashboard noch in Entwicklung. Danke das du so früh dabei bist!
+                    </p>
+                    <p>Aktuell genießt du folgende Vorteile:</p>
+                    <ul>
+                        <li>Deine eigene GameRangerZ-Email ({{$user->username}}@gamerangerz.de)</li>
+                        <li>Nutzungsrechte für den Musicbot</li>
+                        <li>Eine Chance auf den Titel "Tetrismeister"</li>
+                        <li>Achievements</li>
+                    </ul>
+                    <p>Geplante Features:</p>
+                    <ul>
+                        <li>TeamSpeak Statistiken</li>
+                        <li>TeamSpeak Gruppenverwaltung</li>
+                        <li>Ein weiteres Spiel inkl. Titel</li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="col-md-4 grid-margin stretch-card">
             <div class="card">
@@ -16,7 +39,7 @@
                         <h4 class="card-title mb-1">Dein Account</h4>
                         <p class="text-muted mb-1">Status</p>
                     </div>
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="col-12">
                             <div class="preview-list">
                                 <div class="preview-item border-bottom">
@@ -67,7 +90,7 @@
                                     </div>
                                     <div class="preview-item-content d-sm-flex flex-grow">
                                         <div class="flex-grow">
-                                            <h6 class="preview-subject">Email</h6>
+                                            <h6 class="preview-subject">Primäre Email</h6>
                                             <p class="text-muted mb-0">@empty($user->email_verified_at)Bitte bestätige
                                                 deine Email: @endempty{{$user->email}}</p>
                                         </div>
@@ -77,6 +100,22 @@
                                             @else
                                                 <i class="mdi mdi-24px mdi-check text-success"></i>
                                             @endempty
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-danger rounded-circle">
+                                            <i class="mdi mdi-mailbox"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content d-sm-flex flex-grow">
+                                        <div class="flex-grow">
+                                            <h6 class="preview-subject">Deine GameRangerz Email</h6>
+                                            <p class="text-muted mb-0">{{$user->username}}@gamerangerz.de</p>
+                                        </div>
+                                        <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                                            <i class="mdi mdi-24px mdi-check text-success"></i>
                                         </div>
                                     </div>
                                 </div>

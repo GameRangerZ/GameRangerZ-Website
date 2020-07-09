@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use QCod\Gamify\Gamify;
 
 /**
  * App\User
@@ -46,7 +47,7 @@ use Illuminate\Notifications\Notifiable;
  */
 class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable, Gamify;
 
     /**
      * The attributes that are mass assignable.

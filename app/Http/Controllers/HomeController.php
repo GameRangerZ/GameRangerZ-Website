@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use QCod\Gamify\Badge;
 
 class HomeController extends Controller
 {
@@ -28,5 +29,13 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         return view('intern.dashboard', ['user' => $user]);
+    }
+
+    public function achievements()
+    {
+        $user = Auth::user();
+        $achievements = Badge::all();
+
+        return view('intern.achievements', ['user' => $user, 'achievements' => $achievements]);
     }
 }

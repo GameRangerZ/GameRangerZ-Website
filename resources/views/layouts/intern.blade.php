@@ -38,6 +38,15 @@
         <div class="main-panel">
             <div class="content-wrapper">
                 @yield('content')
+                @if ($message = Session::get('achievement'))
+                    <div id="achievement" class="fixed-bottom">
+                        <div class="circle"></div>
+                        <div class="copy">
+                            <h4>Erfolg errungen!</h4>
+                            <p>{{ $message }}</p>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -57,5 +66,50 @@
 <!-- Custom js for this page -->
 <script src="{{asset('assets/js/dashboard.js') }}"></script>
 <!-- End custom js for this page -->
+
+@if ($message = Session::get('achievement'))
+    <script>
+        function showAchievement() {
+            $('#achievement .circle').removeClass('rotate');
+            // Run the animations
+            setTimeout(function () {
+                $('#achievement').addClass('expand');
+                setTimeout(function () {
+                    $('#achievement').addClass('widen');
+                    setTimeout(function () {
+                        $('#achievement .copy').addClass('show');
+                        var audio = new Audio("{{asset("/sound/wow.wav")}}");
+                        audio.play();
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+            // Hide the achievement
+            setTimeout(function () {
+                hideAchievement();
+            }, 5000);
+        }
+
+        function hideAchievement() {
+            setTimeout(function () {
+                $('#achievement .copy').removeClass('show');
+                setTimeout(function () {
+                    $('#achievement').removeClass('widen');
+                    $('#achievement .circle').addClass('rotate');
+                    setTimeout(function () {
+                        $('#achievement').removeClass('expand');
+                        $('.refresh').fadeIn(300);
+                    }, 1000);
+                }, 1000);
+            }, 3000);
+
+            $('.refresh').click(function () {
+                showAchievement();
+                $(this).fadeOut(300);
+            });
+        }
+
+        showAchievement();
+    </script>
+@endif
 </body>
 </html>

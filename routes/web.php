@@ -30,11 +30,10 @@ Route::get('/gaming/world-of-warcraft', 'PagesController@world_of_warcraft')->na
 Route::get('/news', 'NewsController@index');
 
 //Users
-
-Route::get('/home/{user}', 'HomeController@index')->name('profile.show');
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
 Route::get('/tetris/', 'TeamSpeakController@tetris')->name('tetris');
 Route::POST('/tetris/submit', 'TeamSpeakController@tetrisSubmit')->name('tetris.submit');
+Route::get('/achievements', 'HomeController@achievements')->name('achievements');
 
 Auth::routes([
     'register' => true, // Registration Routes...

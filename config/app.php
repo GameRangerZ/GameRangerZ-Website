@@ -169,6 +169,8 @@ return [
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
         //TeamSpeak
         Adams\TeamSpeak3\TeamSpeak3ServiceProvider::class,
+        //Gamify
+        QCod\Gamify\GamifyServiceProvider::class,
 
         /*
          * Package Service Providers...
