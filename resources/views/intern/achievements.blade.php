@@ -32,8 +32,8 @@
                                             <div class="mr-auto text-sm-right pt-2 pt-sm-0">
                                                 <p class="text-muted">Errungen am:</p>
                                                 <p class="text-muted mb-0">
-                                                    {{ $user->badges[0]->firstWhere(['id' => $achievement->id])
-                                                                ->created_at->format('j.n.Y H:i') }}
+                                                    {{ $user->badges->where('id',$achievement->id)->first()->pivot
+                                                        ->created_at->format('j.n.Y H:i')}}
                                                 </p>
                                             </div>
                                         </div>
