@@ -94,6 +94,7 @@ return [
     'numeric'              => ':attribute muss eine Zahl sein.',
     'password'             => 'Das Passwort ist falsch.',
     'present'              => ':attribute muss vorhanden sein.',
+    'recaptcha'            => 'Das reCAPTCHA muss bestätigt sein.',
     'regex'                => ':attribute Format ist ungültig.',
     'required'             => ':attribute muss ausgefüllt werden.',
     'required_if'          => ':attribute muss ausgefüllt werden, wenn :other den Wert :value hat.',
