@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_captcha')
 
 @section('content')
 <div class="container my-5 py-5">
@@ -60,7 +60,18 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-
+                        <div class="form-group row mb-3">
+                            <div class="col-md-6 offset-md-4">
+                                <div id="recaptchaContainer" class="@error(recaptchaFieldName()) is-invalid @enderror">
+                                    {!! htmlFormSnippet() !!}
+                                </div>
+                                @error(recaptchaFieldName())
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-danger">
@@ -68,6 +79,7 @@
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>

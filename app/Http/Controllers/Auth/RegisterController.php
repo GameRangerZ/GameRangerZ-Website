@@ -56,6 +56,7 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'max:255','unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            recaptchaFieldName() => recaptchaRuleName(),
         ]);
     }
 
@@ -72,14 +73,14 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-
+        //@Todo Create Queued Job
         Mailbox::create([
             'domain_id' => 1,
             'email' => $data['username'] . "@gamerangerz.de",
             'password' => crypt($data['password'], sprintf('$6$%s$', substr(bin2hex(openssl_random_pseudo_bytes(16)), 0, 16))),
             'user_id' => $user->id
         ]);
-
+        //@Todo Create Queued Job
         $sinusbot = new API(env("MUSICBOT_URI"));
         $sinusbot->login(env('MUSICBOT_USERNAME'), env('MUSICBOT_PASSWORD'));
         $sinusbot->addUser($user->username, $data['password'], 61445);
