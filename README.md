@@ -1,4 +1,5 @@
 <p align="center"><img src="/public/img/GRZLogo.svg" width="400"></p>
+
 ## About GameRangerZ
 GameRangerZ is a german Multigaming Clan founded in 2014.
 We're using TeamSpeak for our communication, so check out these interesting projects:
