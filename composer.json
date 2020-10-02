@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "gamerangerz/gamerangerz-website",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Website for GameRangerZ.de",
     "keywords": [
         "framework",
         "laravel"
