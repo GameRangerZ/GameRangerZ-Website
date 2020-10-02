@@ -1,4 +1,4 @@
-<p align="center"><img src="/public/img/GRZLogo.svg" width="400"></p>
+![GameRangerZ Logo](./public/img/GRZLogo.png)
 
 ## About GameRangerZ
 GameRangerZ is a german Multigaming Clan founded in 2014.
