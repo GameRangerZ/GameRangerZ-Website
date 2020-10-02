@@ -21,7 +21,8 @@
         "qcod/laravel-gamify": "1.0.4",
         "sinusbot/sinusbot-api-php": "v1.1.0",
         "spatie/laravel-cookie-consent": "2.12.5",
-        "tcg/voyager": "1.4.2"
+        "tcg/voyager": "1.4.2",
+        "biscolab/laravel-recaptcha": ">=4.4"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
