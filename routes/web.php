@@ -57,3 +57,6 @@ Route::group(['prefix' => 'admin'], function () {
 //Legal
 Route::get('datenschutz', 'PagesController@datenschutz')->name('datenschutz');
 Route::get('impressum', 'PagesController@impressum')->name('impressum');
+
+//Deploy
+Route::post('deploy', 'DeployController@deploy');
