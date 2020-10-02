@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\CreateMusicBotUser;
+use App\Jobs\CreateUserMailbox;
 use App\Mailbox;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -10,7 +12,6 @@ use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use SinusBot\API;
 
 class RegisterController extends Controller
 {
@@ -73,17 +74,10 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        //@Todo Create Queued Job
-        Mailbox::create([
-            'domain_id' => 1,
-            'email' => $data['username'] . "@gamerangerz.de",
-            'password' => crypt($data['password'], sprintf('$6$%s$', substr(bin2hex(openssl_random_pseudo_bytes(16)), 0, 16))),
-            'user_id' => $user->id
-        ]);
-        //@Todo Create Queued Job
-        $sinusbot = new API(env("MUSICBOT_URI"));
-        $sinusbot->login(env('MUSICBOT_USERNAME'), env('MUSICBOT_PASSWORD'));
-        $sinusbot->addUser($user->username, $data['password'], 61445);
+
+        //Trigger Jobs
+        CreateUserMailbox::dispatch($user, $data);
+        CreateMusicBotUser::dispatch($user, $data);
 
         return $user;
     }
