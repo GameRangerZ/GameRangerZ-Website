@@ -9,15 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
-        "artesaos/seotools": "^0.18.0",
         "barryvdh/laravel-ide-helper": "^2.7.0",
-        "caouecs/laravel-lang": "^6.0.3",
         "fideloper/proxy": "^4.4.0",
         "invisnik/laravel-steam-auth": "^4.2.0",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
-        "lukasz-adamski/laravel-teamspeak3": "^1.0.4",
         "qcod/laravel-gamify": "^1.0.4",
         "sinusbot/sinusbot-api-php": "^v1.1.0",
         "spatie/laravel-cookie-consent": "^2.12.5",
@@ -28,7 +25,6 @@
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
-        "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.0"
